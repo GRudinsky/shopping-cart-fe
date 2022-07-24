@@ -31,6 +31,7 @@ function CartContainer() {
                 type="number"
                 value={item.qty}
                 min={0}
+                max={99}
                 name={String(item.id)}
                 key={item.id}
                 onFocus={handleFocus}
