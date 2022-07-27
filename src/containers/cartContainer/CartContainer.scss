@@ -44,6 +44,8 @@
         display: block;
         text-align: start;
         flex-basis: 48%;
+        font-size: $font-medium;
+        font-weight: bold;
       }
       .productNumbers {
         display: flex;
@@ -80,6 +82,8 @@
 
         .singleProductTotals {
           color: $color-orange;
+          font-size: $font-medium;
+          font-weight: bold;
         }
       }
     }

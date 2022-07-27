@@ -1,4 +1,4 @@
-// import 'whatwg-fetch';
+import 'whatwg-fetch';
 import { CART_API_URL } from '../constants';
 export const getShoppingCart = async () => {
   const options = {

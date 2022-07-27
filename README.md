@@ -1,7 +1,7 @@
 ## Introduction
 
 This is the solution for the MMT technical challenge task. The app fetches the shopping cart data from the API and fulfills the acceptance criterias given in the below challenge section.
-I decided to utilise TypeScript and used Redux for the global state management. Therefore due to associated time constraints I didn't have time to add unit tests, which I'm planning to add in the near future.
+I decided to utilise TypeScript and used Redux for the global state management, that should work well with possible future product scaling.
 
 ## Available Scripts
 

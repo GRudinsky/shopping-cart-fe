@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducedState } from '../../redux/types';
 import { fetchCart, changeProductQty, clearCart } from '../../redux/actions';
 import './CartContainer.scss';
 
-function CartContainer() {
+const CartContainer = () => {
   const dispatch = useDispatch();
   const products = useSelector(
     (state: ReducedState) => state.shoppingCart.products
@@ -21,54 +21,85 @@ function CartContainer() {
   }, [dispatch]);
 
   return currency ? (
-    <div className="cartWrapper">
+    <form
+      id="cartWrapper"
+      className="cartWrapper"
+      onSubmit={(e) => {
+        e.preventDefault();
+        window.alert('Submitting form');
+      }}
+    >
       <div className="productWrapper">
-        {products?.map((item) => (
-          <div className="productRow">
-            <h6 className="productTitle">{item.title}</h6>
-            <div className="productNumbers">
-              <input
-                type="number"
-                value={item.qty}
-                min={0}
-                max={99}
-                name={String(item.id)}
-                key={item.id}
-                onFocus={handleFocus}
-                onChange={(e) => {
-                  if (e.target.value.length > 1 && e.target.value[0] === '0') {
-                    handleFocus(e);
-                  }
-                  dispatch(
-                    changeProductQty({
-                      id: Number(e.target.name),
-                      qty: Number(e.target.value)
-                    })
-                  );
-                }}
-              ></input>
-              <h6 className="singleProductTotals">
-                {currency + (item.price * item.qty).toFixed(2)}
-              </h6>
+        {products?.map((item, idx) => {
+          const { id, title, qty, price } = item;
+          return (
+            <div data-testId="productRow" key={id} className="productRow">
+              <p data-testId={`productTitle_${idx}`} className="productTitle">
+                {title}
+              </p>
+              <div className="productNumbers">
+                <input
+                  aria-labelledby={`quantityInput_${idx}`}
+                  data-testId={`quantityInput_${idx}`}
+                  type="number"
+                  value={qty}
+                  min={0}
+                  max={99}
+                  name={String(id)}
+                  onFocus={handleFocus}
+                  onChange={(e) => {
+                    if (
+                      e.target.value.length > 1 &&
+                      e.target.value[0] === '0'
+                    ) {
+                      handleFocus(e);
+                    }
+                    dispatch(
+                      changeProductQty({
+                        id: Number(e.target.name),
+                        qty: Number(e.target.value)
+                      })
+                    );
+                  }}
+                ></input>
+                <p
+                  data-testId={`productTotals_${idx}`}
+                  className="singleProductTotals"
+                >
+                  {currency + (price * qty).toFixed(2)}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="actionWrapper">
-        <h2 className="cartSubTotal">
+        <h2 data-testId="cartSubTotal" className="cartSubTotal">
           {currency + cartSubTotal.toFixed(2) || 0}
         </h2>
         <div className="buttonWrapper">
-          <button className="buttonClear" onClick={() => dispatch(clearCart())}>
+          <button
+            data-testId="buttonClear"
+            className="buttonClear"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(clearCart());
+            }}
+          >
             Clear
           </button>
-          <button className="buttonCheckout" disabled={!cartSubTotal}>
+          <button
+            type="submit"
+            data-testId="buttonCheckout"
+            className="buttonCheckout"
+            disabled={!cartSubTotal}
+          >
             Check Out
           </button>
         </div>
       </div>
-    </div>
+    </form>
   ) : null;
-}
+};
 
 export default CartContainer;
