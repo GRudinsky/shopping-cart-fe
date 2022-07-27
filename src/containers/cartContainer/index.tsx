@@ -21,17 +21,25 @@ const CartContainer = () => {
   }, [dispatch]);
 
   return currency ? (
-    <div id="cartWrapper" className="cartWrapper">
+    <form
+      id="cartWrapper"
+      className="cartWrapper"
+      onSubmit={(e) => {
+        e.preventDefault();
+        window.alert('Submitting form');
+      }}
+    >
       <div className="productWrapper">
         {products?.map((item, idx) => {
           const { id, title, qty, price } = item;
           return (
             <div data-testId="productRow" key={id} className="productRow">
-              <h6 data-testId={`productTitle_${idx}`} className="productTitle">
+              <p data-testId={`productTitle_${idx}`} className="productTitle">
                 {title}
-              </h6>
+              </p>
               <div className="productNumbers">
                 <input
+                  aria-labelledby={`quantityInput_${idx}`}
                   data-testId={`quantityInput_${idx}`}
                   type="number"
                   value={qty}
@@ -54,12 +62,12 @@ const CartContainer = () => {
                     );
                   }}
                 ></input>
-                <h6
+                <p
                   data-testId={`productTotals_${idx}`}
                   className="singleProductTotals"
                 >
                   {currency + (price * qty).toFixed(2)}
-                </h6>
+                </p>
               </div>
             </div>
           );
@@ -73,11 +81,15 @@ const CartContainer = () => {
           <button
             data-testId="buttonClear"
             className="buttonClear"
-            onClick={() => dispatch(clearCart())}
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(clearCart());
+            }}
           >
             Clear
           </button>
           <button
+            type="submit"
             data-testId="buttonCheckout"
             className="buttonCheckout"
             disabled={!cartSubTotal}
@@ -86,7 +98,7 @@ const CartContainer = () => {
           </button>
         </div>
       </div>
-    </div>
+    </form>
   ) : null;
 };
 

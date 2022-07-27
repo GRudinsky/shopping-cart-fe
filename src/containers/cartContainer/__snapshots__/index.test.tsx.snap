@@ -4,7 +4,7 @@ exports[`<CartContainer/> should not render the cart container when getShoppingC
 
 exports[`<CartContainer/> should render the cart container correctly when getShoppingCart call returns data 1`] = `
 <div>
-  <div
+  <form
     class="cartWrapper"
     id="cartWrapper"
   >
@@ -15,16 +15,17 @@ exports[`<CartContainer/> should render the cart container correctly when getSho
         class="productRow"
         data-testid="productRow"
       >
-        <h6
+        <p
           class="productTitle"
           data-testid="productTitle_0"
         >
           Mountain Dew
-        </h6>
+        </p>
         <div
           class="productNumbers"
         >
           <input
+            aria-labelledby="quantityInput_0"
             data-testid="quantityInput_0"
             max="99"
             min="0"
@@ -32,28 +33,29 @@ exports[`<CartContainer/> should render the cart container correctly when getSho
             type="number"
             value="1"
           />
-          <h6
+          <p
             class="singleProductTotals"
             data-testid="productTotals_0"
           >
             $1.80
-          </h6>
+          </p>
         </div>
       </div>
       <div
         class="productRow"
         data-testid="productRow"
       >
-        <h6
+        <p
           class="productTitle"
           data-testid="productTitle_1"
         >
           Desperados
-        </h6>
+        </p>
         <div
           class="productNumbers"
         >
           <input
+            aria-labelledby="quantityInput_1"
             data-testid="quantityInput_1"
             max="99"
             min="0"
@@ -61,28 +63,29 @@ exports[`<CartContainer/> should render the cart container correctly when getSho
             type="number"
             value="1"
           />
-          <h6
+          <p
             class="singleProductTotals"
             data-testid="productTotals_1"
           >
             $3.10
-          </h6>
+          </p>
         </div>
       </div>
       <div
         class="productRow"
         data-testid="productRow"
       >
-        <h6
+        <p
           class="productTitle"
           data-testid="productTitle_2"
         >
           Jack Daniels
-        </h6>
+        </p>
         <div
           class="productNumbers"
         >
           <input
+            aria-labelledby="quantityInput_2"
             data-testid="quantityInput_2"
             max="99"
             min="0"
@@ -90,12 +93,12 @@ exports[`<CartContainer/> should render the cart container correctly when getSho
             type="number"
             value="1"
           />
-          <h6
+          <p
             class="singleProductTotals"
             data-testid="productTotals_2"
           >
             $3.35
-          </h6>
+          </p>
         </div>
       </div>
     </div>
@@ -120,11 +123,12 @@ exports[`<CartContainer/> should render the cart container correctly when getSho
         <button
           class="buttonCheckout"
           data-testid="buttonCheckout"
+          type="submit"
         >
           Check Out
         </button>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 `;
