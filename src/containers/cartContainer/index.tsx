@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducedState } from '../../redux/types';
 import { fetchCart, changeProductQty, clearCart } from '../../redux/actions';
@@ -33,14 +33,14 @@ const CartContainer = () => {
         {products?.map((item, idx) => {
           const { id, title, qty, price } = item;
           return (
-            <div data-testId="productRow" key={id} className="productRow">
-              <p data-testId={`productTitle_${idx}`} className="productTitle">
+            <div data-testid="productRow" key={id} className="productRow">
+              <p data-testid={`productTitle_${idx}`} className="productTitle">
                 {title}
               </p>
               <div className="productNumbers">
                 <input
                   aria-labelledby={`quantityInput_${idx}`}
-                  data-testId={`quantityInput_${idx}`}
+                  data-testid={`quantityInput_${idx}`}
                   type="number"
                   value={qty}
                   min={0}
@@ -63,7 +63,7 @@ const CartContainer = () => {
                   }}
                 ></input>
                 <p
-                  data-testId={`productTotals_${idx}`}
+                  data-testid={`productTotals_${idx}`}
                   className="singleProductTotals"
                 >
                   {currency + (price * qty).toFixed(2)}
@@ -74,12 +74,12 @@ const CartContainer = () => {
         })}
       </div>
       <div className="actionWrapper">
-        <h2 data-testId="cartSubTotal" className="cartSubTotal">
+        <h2 data-testid="cartSubTotal" className="cartSubTotal">
           {currency + cartSubTotal.toFixed(2) || 0}
         </h2>
         <div className="buttonWrapper">
           <button
-            data-testId="buttonClear"
+            data-testid="buttonClear"
             className="buttonClear"
             onClick={(e) => {
               e.preventDefault();
@@ -90,7 +90,7 @@ const CartContainer = () => {
           </button>
           <button
             type="submit"
-            data-testId="buttonCheckout"
+            data-testid="buttonCheckout"
             className="buttonCheckout"
             disabled={!cartSubTotal}
           >
